@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="imgs/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Weather</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a class="navbar-brand fs-4" href="#">Weather</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#header">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="#about">News</a>
+              </li><li class="nav-item">
+                <a class="nav-link" aria-current="page" href="#services">Live cameras</a>
+              </li><li class="nav-item">
+                <a class="nav-link" aria-current="page" href="#work">Photos</a>
+              </li><li class="nav-item">
+                <a class="nav-link" aria-current="page" href="#clients">Contact</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div class="hero" style="background-image: url(imgs/banner.png)">
+        <div class="container">
+          <form class="find-location">
+            <input type="text" placeholder="Find Your Location" class="search">
+            <input type="button" value="find" class="input-btn">
+          </form>
+        </div>
+      </div>
+      <div class="forecast-table">
+        <div class="container">
+          <div class="forecast-container">
+            <div class="forecast">
+              <div class="forecast-header today">
+                <div class="day">Friday</div>
+                <div class="date">5 January</div>
+              </div>
+              <div class="forecast-content" id="current">
+                <div class="location">Cairo</div>
+                <div class="degree">
+                    <div class="num">21<sup>o</sup>C</div>
+                </div>
+                <div class="custom">Sunny</div>
+                      <span><img src="imgs/icon-umberella.png" alt="">20%</span>
+                        <span><img src="imgs/icon-wind.png" alt="">18km/h</span>
+                      <span><img src="imgs/icon-compass.png" alt="">East</span>
+                </div>
+            </div>
+            <div class="forecast">
+              <div class="forecast-header">
+                <div class="day">Saturday</div>
+              </div>
+              <div class="forecast-content">
+                <div class="forecast-icon">
+                    <img src="https://cdn.weatherapi.com/weather/64x64/day/113.png" alt="" width="48">
+                </div>
+                <div class="degree">22.3<sup>o</sup>C</div>
+                <small>14<sup>o</sup></small>
+                <div class="custom">Sunny</div>
+            </div>
+            </div>
+            <div class="forecast">
+              <div class="forecast-header">
+                <div class="day">Sunday</div>
+              </div>
+              <div class="forecast-content">
+                <div class="forecast-icon">
+                    <img src="https://cdn.weatherapi.com/weather/64x64/day/113.png" alt="" width="48">
+                </div>
+                <div class="degree">24<sup>o</sup>C</div>
+                <small>14.7<sup>o</sup></small>
+                <div class="custom">Sunny</div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8">
+              <form action="#" class="subscribe-form">
+								<input type="text" placeholder="Enter your email to subscribe" class="search">
+								<input type="submit" value="Subscribe" class="input-btn subscribe">
+							</form>
+            </div>
+            <div class="col-md-3 col-md-offset-1">
+							<div class="social-links">
+								<a href="#"><i class="fa-brands fa-facebook"></i></a>
+								<a href="#"><i class="fa-brands fa-twitter"></i></a>
+								<a href="#"><i class="fa-brands fa-google-plus"></i></a>
+								<a href="#"><i class="fa-brands fa-pinterest"></i></a>
+							</div>
+						</div>
+          </div>
+          <p>Copyright 2014 Company name. Designed by Themezy. All rights reserved</p>
+        </div>
+      </footer>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/index.js"></script>
+</body>
+</html>
