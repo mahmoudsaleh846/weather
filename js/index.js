@@ -3,7 +3,7 @@ const apiKey = "1155e4fdf9344ca791253527240601";
 const searchBox = document.querySelector(".find-location .search")
 const searchBtn = document.querySelector(".find-location .input-btn")
 async function checkWeather(cityName){
-    const apiUrl = `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${cityName}&days=3`;
+    const apiUrl = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${cityName}&days=3`;
     const response = await fetch(apiUrl);
     var data = await response.json();
 
