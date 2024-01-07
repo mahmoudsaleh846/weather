@@ -1,60 +1,56 @@
-document.addEventListener('DOMContentLoaded', function() {
-    document.querySelector('.input-btn').addEventListener('click', function() {
-        // Get the city name from the input field
-        var cityName = document.querySelector('.search').value;
+const apiKey = "1155e4fdf9344ca791253527240601";         
 
-        // Make sure the city name is not empty
-        if (cityName.trim() !== "") {
-            // Use your WeatherAPI.com API key
-            var apiKey = "1155e4fdf9344ca791253527240601";
+const searchBox = document.querySelector(".find-location .search")
+const searchBtn = document.querySelector(".find-location .input-btn")
+async function checkWeather(cityName){
+    const apiUrl = `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${cityName}&days=3`;
+    const response = await fetch(apiUrl);
+    var data = await response.json();
 
-            // Construct the API URL
-            var apiUrl = "http://api.weatherapi.com/v1/forecast.json?key=" + apiKey + "&q=" + cityName + "&days=3";
+    var localTime = data.location.localtime;
+    var dateObject = new Date(localTime);
+    var dayOfWeek = dateObject.getDay();
+    var weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    var dayName = weekdays[dayOfWeek];
+    var month = dateObject.getMonth();
+    var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    var monthName = months[month];
+    var dayOfMonth = dateObject.getDate();
 
-            // Make the API request using the fetch API
-            fetch(apiUrl)
-                .then(response => {
-                    if (response.status === 200) {
-                        return response.json();
-                    } else {
-                        throw new Error('Failed to fetch weather information. Please check the city name and try again.');
-                    }
-                })
-                .then(data => {
-                    // Update the weather information on the page
-                    document.querySelector('.location').textContent = data.location.name;
-                    document.querySelector('.num').innerHTML = data.current.temp_c + "<sup>o</sup>C";
-                    document.querySelector('.custom').textContent = data.current.condition.text;
-
-                    // Update rain percentage, wind speed, and wind direction
-                    var spans = document.querySelectorAll('.forecast-content span');
-                    spans[0].innerHTML = `<img src='imgs/icon-umberella.png' alt=''>${data.current.humidity}%`;
-                    spans[1].innerHTML = `<img src='imgs/icon-wind.png' alt=''>${data.current.wind_kph}km/h`;
-                    spans[2].innerHTML = `<img src='imgs/icon-compass.png' alt=''>${data.current.wind_dir}`;
-
-                    // Update date and day for today
-                    var currentDate = new Date(data.location.localtime);
-                    var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-                    var formattedDate = currentDate.toLocaleDateString('en-US', options);
-                    document.querySelector('.day').textContent = formattedDate.split(',')[0];
-                    document.querySelector('.date').textContent = formattedDate.split(',')[1].trim();
-
-                    // Update forecast for the next two days
-                    for (var i = 1; i <= 2; i++) {
-                        var forecastDay = data.forecast.forecastday[i];
-                        var forecastElement = document.querySelector(`.forecast:nth-child(${i + 1})`);
-                        forecastElement.querySelector('.day').textContent = forecastDay.date;
-                        forecastElement.querySelector('.forecast-icon img').src = forecastDay.day.condition.icon;
-                        forecastElement.querySelector('.degree').innerHTML = `${forecastDay.day.avgtemp_c}<sup>o</sup>C`;
-                        forecastElement.querySelector('.custom').textContent = forecastDay.day.condition.text;
-                    }
-                })
-                .catch(error => {
-                    console.error('Error fetching weather information:', error.message);
-                    alert(error.message);
-                });
-        } else {
-            alert("Please enter a city name.");
-        }
-    });
+    //current day
+    document.querySelector(".today .date").innerHTML = dayOfMonth + monthName
+    document.querySelector(".today .day").innerHTML = dayName
+    document.querySelector(".current .location").innerHTML = data.location.name;
+    document.querySelector(".current .num").innerHTML = Math.round(data.current.temp_c)+`<sup>o</sup>`+"C";
+    document.querySelector(".current .custom").innerHTML = data.current.condition.text;
+    document.querySelector(".current .humidity").innerHTML = `<img src="imgs/icon-umberella.png" alt="" class = "icon">`+ data.current.humidity + "%";
+    document.querySelector(".current .wind").innerHTML = `<img src="imgs/icon-wind.png" alt="" class = "icon">`+ Math.round(data.current.wind_kph)+ "km/h";
+    document.querySelector(".current .direction").innerHTML = `<img src="imgs/icon-compass.png" alt="" class = "icon">`+ data.current.wind_dir;
+    //next day
+    nextDay= data.forecast.forecastday[1];
+    var localTime = nextDay.date;
+    var dateObject = new Date(localTime);
+    var dayOfWeek = dateObject.getDay();
+    var dayName = weekdays[dayOfWeek];
+    document.querySelector(".sec-day .day").innerHTML = dayName;
+    document.querySelector(".sec-day .degree").innerHTML = nextDay.day.maxtemp_c;
+    //third day 
+    thirdDay= data.forecast.forecastday[2];
+    var localTime = thirdDay.date;
+    var dateObject = new Date(localTime);
+    var dayOfWeek = dateObject.getDay();
+    var dayName = weekdays[dayOfWeek];
+    document.querySelector(".third-day .day").innerHTML = dayName;
+    document.querySelector(".third-day .degree").innerHTML = thirdDay.day.maxtemp_c;
+}
+function showDefaultWeather() {
+    checkWeather("Cairo");
+}
+document.addEventListener('DOMContentLoaded', function () {
+    showDefaultWeather();
 });
+searchBtn.addEventListener("click", ()=>{
+    checkWeather(searchBox.value)
+})
+
+         

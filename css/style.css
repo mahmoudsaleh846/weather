@@ -73,7 +73,9 @@ form input, form textarea form select{
     top: 5rem;
     right: 8rem;
 }
-
+.icon{
+    margin-right: 0.5rem;
+}
 .forecast-container .forecast:nth-child(even){
     background-color: #262936;
 }
